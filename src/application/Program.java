@@ -1,27 +1,37 @@
 package application;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Program {
 
 	public static void main(String[] args) throws IOException {
 
 
-		String[]lines = new String[] {"Good morning ", "Good afternoon", "Good night"};
+		Scanner sc = new Scanner(System.in);
 		
-		String path = "C:\\Users\\Thiag\\Documents\\javaa\\in.txt";
+		System.out.println("Enter a folder path: ");
+		String strPath = sc.nextLine();
 		
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))){//adicionar o parametro true, indica que não quer recriar o arquivo mas sim adicionar o conteudo
-			for(String line: lines) {
-				bw.write(line);
-				bw.newLine();//para dar quebra de linha
-			}
+		File path = new File(strPath);
+		
+		File[] folders = path.listFiles(File::isDirectory);//isDirectory especifica  apenas o que for diretório ou pasta
+		System.out.println("FOLDERS");
+		for(File folder : folders) {
+			System.out.println(folder);
 		}
-		catch(IOException e) {
-			e.printStackTrace();
+		
+		File[]files = path.listFiles(File::isFile);
+		System.out.println("FILES: ");
+		for(File file : files) {
+			System.out.println(file);
 		}
+		
+		boolean sucess = new File(strPath + "\\subdir").mkdir();
+		System.out.println("Diretório criado com sucesso! "  + sucess);
+		
+		sc.close();
 	}
 }
 
