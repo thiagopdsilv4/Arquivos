@@ -11,26 +11,14 @@ public class Program {
 
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter a folder path: ");
+		System.out.println("Enter a file path: ");
 		String strPath = sc.nextLine();
 		
 		File path = new File(strPath);
 		
-		File[] folders = path.listFiles(File::isDirectory);//isDirectory especifica  apenas o que for diretório ou pasta
-		System.out.println("FOLDERS");
-		for(File folder : folders) {
-			System.out.println(folder);
-		}
-		
-		File[]files = path.listFiles(File::isFile);
-		System.out.println("FILES: ");
-		for(File file : files) {
-			System.out.println(file);
-		}
-		
-		boolean sucess = new File(strPath + "\\subdir").mkdir();
-		System.out.println("Diretório criado com sucesso! "  + sucess);
-		
+		System.out.println("GetName: " + path.getName());
+		System.out.println("GetParent: " + path.getParent());//chama o nome do arquivo e o get name, o nome da pasta
+		System.out.println("GetPath: " + path.getPath());
 		sc.close();
 	}
 }
